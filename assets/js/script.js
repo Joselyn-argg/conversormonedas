@@ -3,6 +3,7 @@ const selectMoneda = document.getElementById('moneda');
 const btnBuscar = document.getElementById('btnBuscar');
 const pResultado = document.getElementById('resultado');
 const pError = document.getElementById('error');
+const chartContainer = document.getElementById('chartContainer');
 
 const baseUrl = 'https://mindicador.cl/api/';
 
@@ -37,8 +38,16 @@ async function convertirMoneda () {
         if(!codigoMoneda) {
             pError.textContent = 'Por favor seleccione una moneda';
             pResultado.textContent = '';
-            return
+
+            chartContainer.classList.add('hidden');
+            if (window.chart) {
+                window.chart.destroy();
+                window.chart = null;
+            }
+            return;
         } 
+
+        chartContainer.classList.remove('hidden');
 
         const res = await fetch(`https://mindicador.cl/api/${codigoMoneda}`);
         const data = await res.json();
@@ -48,13 +57,51 @@ async function convertirMoneda () {
 
         pResultado.textContent = `$${montoPesos.toLocaleString('es-CL')} pesos chilenos son aproximadamente ${resultado.toFixed(2)} ${codigoMoneda}`
 
-    } catch (error) {
-        pResultado.textContent = '';
-        pError.textContent = 'Ocurrió un error al realizar la conversión';
-        console.log(error)
-    }
+        // Renderizar la grafica (ultimos 20 dias)
+        const fechasMoneda = data.serie.slice(0, 20).map(item =>{
+            return new Date(item.fecha).toLocaleDateString('es-CL');
+        }).reverse();
+        const valores = data.serie.slice(0, 20).map(item => item.valor).reverse();
 
-}
+        const ctx = document.getElementById('myChart');
+        if (!ctx) return;
+
+        if (window.chart) {
+            window.chart.destroy();
+        }
+
+        window.chart = new Chart(ctx.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: fechasMoneda,
+                datasets: [{
+                   label: `Valor histórico del ${codigoMoneda}`,
+                  data: valores,
+                  borderColor: '#3B82F6',
+                  tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                    beginAtZero: false
+                    }
+                }
+            }
+        });
+        } catch (error) {
+            pResultado.textContent = '';
+            pError.textContent = 'Ocurrió un error al realizar la conversión';
+
+            chartContainer.classList.add('hidden');
+            if(window.chart) {
+                window.chart.destroy();
+                window.chart = null;
+            }
+            console.log(error)
+            }
+        };
 
 getMonedas();
 

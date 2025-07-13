@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <!--Tailwind-->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!--Chart.js-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body
     class="bg-gray-900 text-white min-h-screen flex flex-col items-center p-6"
@@ -52,6 +54,12 @@
       <p id="resultado" class="text-lg text-center text-green-500 max-w-[250px] mx-auto mt-3"></p>
       <p id="error" class="text-lg text-center text-red-500 max-w-[250px] mx-auto mt-3"></p>
     </section>
+    <!--Grafico-->
+    <div id="chartContainer" class="mt-6 w-full max-w-3xl mx-auto bg-white rounded-lg hidden">
+        <div class="aspect-w-16 aspect-h-9"> <!-- Relación de aspecto 16:9 -->
+            <canvas id="myChart" class="w-full h-full p-4"></canvas>
+        </div>
+    </div>
     <!--Mi js-->
     <script src="./assets/js/script.js"></script>
   </body>
