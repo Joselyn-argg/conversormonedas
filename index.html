@@ -1,40 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Conversor de monedas nacional</title>
     <!--Mi css-->
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <!--Tailwind-->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
-<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center p-6">
-    <h1 class="text-3x1 font-bold mb-6">Conversor de monedas Nacional</h1>
+  </head>
+  <body
+    class="bg-gray-900 text-white min-h-screen flex flex-col items-center p-6"
+  >
+    <h1 class="text-3xl font-bold mb-6 relative py-4">
+      <span
+        class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent"
+      ></span>
+      Conversor de monedas Nacional
+      <span
+        class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent"
+      ></span>
+    </h1>
     <!--card-->
     <section class="bg-gray-500 p-5 rounded">
-        <!--input pesos-->
-        <div class="flex flex-col items-center">
-            <label for="monto">Pesos CLP</label>
-            <input type="number"
-            id="monto"
-            class="bg-white text-black rounded no-spinner px-2 mb-3" 
-            placeholder="Ingrese el monto en CLP">
-        </div>
-        <!--Select-->
-        <div class="flex flex-col items-center">
-            <label for="moneda">Moneda a convertir</label>
-            <select name="" id="moneda"
-            class="bg-white text-black rounded no-spinner px-2 mb-3" >
-            <option value="">Seleccione una moneda</option>
-            </select>
-        </div>
-        <!--Button-->
-        <button id="btnBuscar" class="rounded bg-blue-400 py-2 w-full">Buscar</button>
-        <!--Resultado-->
-        <p id="resultado" class="text-center mt-3" >...</p>
-    </section>  
-    <!--Mi js--> 
+      <!--input pesos-->
+      <div class="flex flex-col items-center">
+        <label for="monto">Pesos CLP</label>
+        <input
+          type="number"
+          id="monto"
+          class="bg-white text-black rounded no-spinner px-2 mb-4"
+          placeholder="Ingrese el monto en CLP"
+        />
+      </div>
+      <!--Select-->
+      <div class="flex flex-col items-center">
+        <label for="moneda">Moneda a convertir</label>
+        <select
+          name=""
+          id="moneda"
+          class="bg-white text-black rounded no-spinner px-2 mb-4"
+        >
+          <option value="">Seleccione una moneda</option>
+        </select>
+      </div>
+      <!--Button-->
+      <button id="btnBuscar" class="rounded bg-blue-400 py-2 w-full">
+        Buscar
+      </button>
+      <!--Resultado-->
+      <p id="resultado" class="text-lg text-center text-green-500 max-w-[250px] mx-auto mt-3"></p>
+      <p id="error" class="text-lg text-center text-red-500 max-w-[250px] mx-auto mt-3"></p>
+    </section>
+    <!--Mi js-->
     <script src="./assets/js/script.js"></script>
-</body>
+  </body>
 </html>
