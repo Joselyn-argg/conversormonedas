@@ -77,8 +77,10 @@ async function convertirMoneda () {
                 datasets: [{
                    label: `Valor histórico del ${codigoMoneda}`,
                   data: valores,
-                  borderColor: '#3B82F6',
-                  tension: 0.1
+                  borderColor: 'rgb(234, 88, 12)', // Naranja Tailwind
+                  borderWidth: 2,
+                  tension: 0.4,
+                  pointBackgroundColor: 'rgb(234, 88, 12)'
                 }]
             },
             options: {
